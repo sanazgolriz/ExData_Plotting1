@@ -1,0 +1,21 @@
+df <- read.table("../Downloads/Coursera/household_power_consumption.txt", header=TRUE, sep=";", stringsAsFactors=FALSE, dec=".")
+df_filter <- df[df$Date %in% c("1/2/2007","2/2/2007") ,]
+gAP <- as.numeric(df_filter$Global_active_power)
+gRP <- as.numeric(df_filter$Global_reactive_power)
+voltage <- as.numeric(df_filter$Voltage)
+
+plot_dt <- strptime(paste(df_filter$Date, df_filter$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+subMet1 <- as.numeric(df_filter$Sub_metering_1)
+subMet2 <- as.numeric(df_filter$Sub_metering_2)
+subMet3 <- as.numeric(df_filter$Sub_metering_3)
+
+png("plot4.png", width=480, height=480)
+par(mfrow = c(2, 2)) 
+plot(plot_dt, gAP, type="l", xlab="", ylab="Global Active Power", cex=0.2)
+plot(plot_dt, voltage, type="l", xlab="datetime", ylab="Voltage")
+plot(plot_dt, subMet1, ylab="Energy Submetering", xlab="", type="l")
+lines(plot_dt, subMet2,  col="red", type="l")
+lines(plot_dt, subMet3,  col="blue", type="l")
+legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=, lwd=2.5, col=c("black", "red", "blue"), bty="o")
+plot(plot_dt, gRP, type="l", xlab="datetime", ylab="Global_reactive_power")
+dev.off()
