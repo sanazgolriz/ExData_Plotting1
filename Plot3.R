@@ -8,7 +8,7 @@ subMet2 <- as.numeric(df_filter$Sub_metering_2)
 subMet3 <- as.numeric(df_filter$Sub_metering_3)
 
 png("plot3.png", width=480, height=480)
-plot(plot_dt, subMet1,  ylab="Energy Submetering", xlab="", type="l")
+plot(plot_dt, subMet1,  ylab="Energy Sub metering", xlab="", type="l")
 lines(plot_dt, subMet3, col="blue",type="l")
 lines(plot_dt, subMet2, col="red", type="l")
 legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "red", "blue"),lty=1, lwd=2.5)
